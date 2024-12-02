@@ -1,4 +1,36 @@
-# CompTIA Security+ (SY0-701) Detailed Study Guide - Part 1
+# CompTIA Security+ (SY0-701) Study Guide
+
+## Table of Contents
+
+1. [Security Architecture (21%)](#1-security-architecture-21-of-exam)
+
+   - [Network Security Architecture](#11-network-security-architecture)
+     - [Network Segmentation](#network-segmentation-deep-dive)
+     - [Zero Trust Architecture](#zero-trust-architecture)
+     - [Cryptography and PKI](#cryptography-and-pki)
+   - [Cloud Security](#12-cloud-security)
+   - [Network Defense](#13-network-defense)
+
+2. [Security Operations (25%)](#2-security-operations-25-of-exam)
+
+   - [Security Tools and Technologies](#21-security-tools-and-technologies)
+   - [Incident Response Process](#22-incident-response-process)
+   - [Threat Hunting and Intelligence](#23-threat-hunting-and-intelligence)
+
+3. [Security Testing and Monitoring (22%)](#3-security-testing-and-monitoring-22-of-exam)
+
+   - [Vulnerability Management](#31-vulnerability-management)
+   - [Penetration Testing](#32-penetration-testing)
+   - [Security Monitoring](#33-security-monitoring)
+
+4. [Identity and Access Management (18%)](#4-identity-and-access-management-18-of-exam)
+
+   - [Authentication Methods and Identity Management](#41-authentication-methods-and-identity-management)
+   - [Access Control Implementation](#42-access-control-implementation)
+
+5. [Risk Management and Compliance (14%)](#5-risk-management-and-compliance-14-of-exam)
+   - [Risk Management Framework](#51-risk-management-framework)
+   - [Compliance and Security Frameworks](#52-compliance-and-security-frameworks)
 
 ## 1. Security Architecture (21% of exam)
 
@@ -28,6 +60,7 @@ Network segmentation divides a network into smaller, isolated segments to improv
      ```
 
 2. **VLAN Segmentation**
+
    - Department-based separation:
      ```
      VLAN 10: Finance (High Security)
