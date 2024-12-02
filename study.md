@@ -5,11 +5,14 @@
 ### 1.1 Network Security Architecture
 
 #### Network Segmentation Deep Dive
+
 **Concept Explanation:**
 Network segmentation divides a network into smaller, isolated segments to improve security by containing breaches and controlling access. Think of it like a ship with watertight compartments – if one section is compromised, the others remain secure.
 
 **Implementation Details:**
+
 1. **DMZ (Demilitarized Zone)**
+
    - Purpose: Hosts public-facing services while protecting internal network
    - Components:
      ```
@@ -32,12 +35,13 @@ Network segmentation divides a network into smaller, isolated segments to improv
      VLAN 30: Guest Network (Low Security)
      ```
    - Security measures per VLAN:
+
      ```
      Finance VLAN:
      - 802.1X authentication
      - IPS monitoring
      - Encrypted traffic only
-     
+
      Marketing VLAN:
      - Standard authentication
      - Basic IDS monitoring
@@ -45,12 +49,16 @@ Network segmentation divides a network into smaller, isolated segments to improv
      ```
 
 #### Zero Trust Architecture
+
 **Core Principles:**
+
 1. **Never Trust, Always Verify**
+
    - Every access request is validated regardless of source
    - No automatic trust based on network location
 
 2. **Least Privilege Access**
+
    ```
    Example Access Matrix:
    Marketing Manager:
@@ -71,11 +79,145 @@ Network segmentation divides a network into smaller, isolated segments to improv
    - Activity logging
    ```
 
+#### Cryptography and PKI
+
+#### Cryptographic Concepts
+
+```
+1. Symmetric Encryption:
+   Algorithms:
+   - AES (128/256-bit)
+   - 3DES (legacy)
+   - ChaCha20
+
+   Use Cases:
+   - File encryption
+   - Database encryption
+   - Session encryption
+
+   Key Management:
+   - Secure key distribution
+   - Regular key rotation
+   - Key backup procedures
+
+2. Asymmetric Encryption:
+   Algorithms:
+   - RSA (2048/4096-bit)
+   - ECC (Elliptic Curve)
+   - DSA
+
+   Components:
+   - Public key (encryption/verify)
+   - Private key (decryption/sign)
+
+   Use Cases:
+   - Digital signatures
+   - Key exchange
+   - SSL/TLS certificates
+```
+
+#### Public Key Infrastructure (PKI)
+
+```
+1. Certificate Hierarchy:
+   Root CA
+   └── Intermediate CA
+       ├── SSL Certificates
+       ├── Code Signing Certs
+       └── Email Certificates
+
+2. Certificate Components:
+   X.509 Structure:
+   {
+     "Version": "v3",
+     "Serial Number": "4a:15:ff:7d...",
+     "Signature Algorithm": "sha256WithRSAEncryption",
+     "Issuer": "CN=Company CA, O=Company, C=US",
+     "Validity": {
+       "Not Before": "2024-01-01",
+       "Not After": "2025-01-01"
+     },
+     "Subject": "CN=server.company.com",
+     "Public Key": "RSA 2048-bit"
+   }
+
+3. Certificate Management:
+   Lifecycle:
+   □ Generation
+   □ Distribution
+   □ Storage
+   □ Renewal
+   □ Revocation
+   □ Archival
+```
+
+#### Hashing and Digital Signatures
+
+```
+1. Hash Functions:
+   Common Algorithms:
+   - SHA-256/SHA-384/SHA-512
+   - BLAKE2
+   - SHA-3
+
+   Properties:
+   - One-way function
+   - Fixed output length
+   - Collision resistant
+
+   Use Cases:
+   - Password storage
+   - File integrity
+   - Digital signatures
+
+2. Digital Signatures:
+   Process Flow:
+   1. Create hash of document
+   2. Encrypt hash with private key
+   3. Attach signature to document
+   4. Verify with public key
+
+   Applications:
+   - Code signing
+   - Email signing (S/MIME)
+   - Document authentication
+```
+
+#### Key Exchange and Management
+
+```
+1. Key Exchange Protocols:
+   Diffie-Hellman:
+   - DHE (Ephemeral)
+   - ECDHE (Elliptic Curve)
+
+   Process:
+   1. Public parameters shared
+   2. Private values generated
+   3. Public values exchanged
+   4. Shared secret computed
+
+2. Key Management:
+   Best Practices:
+   - Secure generation
+   - Safe storage (HSM)
+   - Regular rotation
+   - Access controls
+   - Backup procedures
+
+   Documentation:
+   □ Key inventory
+   □ Access logs
+   □ Rotation schedule
+   □ Recovery procedures
+```
+
 ### 1.2 Cloud Security
 
 #### Cloud Service Models Security
 
 **1. SaaS (Software as a Service) Security:**
+
 ```
 Microsoft 365 Security Configuration:
 1. Identity Protection:
@@ -96,6 +238,7 @@ Microsoft 365 Security Configuration:
 ```
 
 **2. IaaS (Infrastructure as a Service) Security:**
+
 ```
 AWS EC2 Security Layers:
 1. Network Security:
@@ -103,7 +246,7 @@ AWS EC2 Security Layers:
    - Public subnet: Load balancers
    - Private subnet: Application servers
    - Isolated subnet: Databases
-   
+
 2. Instance Security:
    - Security groups (instance firewall)
    - Host-based IDS
@@ -117,6 +260,7 @@ AWS EC2 Security Layers:
 ```
 
 **3. PaaS (Platform as a Service) Security:**
+
 ```
 Azure App Service Security:
 1. Platform Security:
@@ -133,6 +277,7 @@ Azure App Service Security:
 #### Cloud Security Controls
 
 **1. Identity and Access Management:**
+
 ```
 AWS IAM Example:
 1. User Management:
@@ -154,6 +299,7 @@ AWS IAM Example:
 ```
 
 **2. Data Protection:**
+
 ```
 Protection Layers:
 1. At Rest:
@@ -173,6 +319,7 @@ Protection Layers:
 ```
 
 **3. Monitoring and Compliance:**
+
 ```
 Cloud Monitoring Strategy:
 1. Log Collection:
@@ -186,7 +333,7 @@ Cloud Monitoring Strategy:
    - Unauthorized API calls
    - Root account usage
    - Security group changes
-   
+
    Medium Priority:
    - Resource scaling events
    - Configuration changes
@@ -196,7 +343,9 @@ Cloud Monitoring Strategy:
 ### 1.3 Network Defense
 
 #### Firewall Implementation
+
 **Types and Uses:**
+
 ```
 1. Packet Filtering:
    Rule Example:
@@ -223,21 +372,23 @@ Cloud Monitoring Strategy:
 ### 2.1 Security Tools and Technologies
 
 #### SIEM (Security Information and Event Management)
+
 **Core Components and Implementation:**
 
 1. **Log Collection and Aggregation**
+
 ```
 Log Sources:
 1. Network Devices:
    - Firewalls: Palo Alto, Cisco ASA
    - Routers: BGP changes, routing anomalies
    - Switches: Port security violations
-   
+
 2. Security Controls:
    - IDS/IPS: Snort, Suricata alerts
    - Antivirus: Microsoft Defender, McAfee
    - WAF: ModSecurity events
-   
+
 3. Systems:
    - Windows Event Logs:
      • Security (ID 4624: Successful login)
@@ -250,6 +401,7 @@ Log Sources:
 ```
 
 2. **Correlation Rules and Alerts**
+
 ```
 Example Rule: Potential Privilege Escalation
 Conditions:
@@ -282,18 +434,19 @@ IF (
 ```
 
 3. **Security Metrics and Reporting**
+
 ```
 Daily Security Dashboard:
 1. Threat Metrics:
    - Malware detections: Trend analysis
    - Failed login attempts: Geographic distribution
    - Network scans: Source IP analysis
-   
+
 2. Compliance Metrics:
    - Patch status: % systems updated
    - Password policy: Compliance rate
    - Encryption status: Data at rest/in transit
-   
+
 3. Operational Metrics:
    - System availability
    - Mean time to detect (MTTD)
@@ -305,6 +458,7 @@ Daily Security Dashboard:
 #### Detailed Incident Response Framework
 
 1. **Preparation Phase**
+
 ```
 Documentation Requirements:
 1. Incident Response Plan:
@@ -312,14 +466,14 @@ Documentation Requirements:
    - Communication procedures
    - Escalation matrix
    - Contact information
-   
+
 2. Playbooks by Incident Type:
    Malware Infection:
    □ Isolate infected systems
    □ Collect malware samples
    □ Identify patient zero
    □ Block IOCs at firewall
-   
+
    Data Breach:
    □ Identify compromised data
    □ Legal notification requirements
@@ -328,24 +482,25 @@ Documentation Requirements:
 ```
 
 2. **Detection and Analysis**
+
 ```
 Analysis Workflow:
 1. Initial Triage:
    - Severity assessment
    - Scope determination
    - Impact analysis
-   
+
 2. Evidence Collection:
    System Memory:
    - RAM dump
    - Process list
    - Network connections
-   
+
    System Disk:
    - File system timeline
    - Registry analysis
    - Log review
-   
+
    Network Evidence:
    - PCAP files
    - Flow data
@@ -353,6 +508,7 @@ Analysis Workflow:
 ```
 
 3. **Containment Strategies**
+
 ```
 Short-term Containment:
 - Block malicious IPs
@@ -364,7 +520,7 @@ Long-term Containment:
    - Patch vulnerabilities
    - Review access controls
    - Update security baseline
-   
+
 2. Network Controls:
    - Segment affected systems
    - Implement additional monitoring
@@ -372,18 +528,19 @@ Long-term Containment:
 ```
 
 4. **Eradication and Recovery**
+
 ```
 Eradication Steps:
 1. Remove Malware:
    - Run specialized cleanup tools
    - Remove persistence mechanisms
    - Clean registry entries
-   
+
 2. System Restoration:
    - Validate backup integrity
    - Restore from clean backup
    - Patch management
-   
+
 3. Verification:
    - Security scanning
    - Integrity checking
@@ -393,10 +550,11 @@ Eradication Steps:
 ### 2.3 Threat Hunting and Intelligence
 
 #### Threat Hunting Process
+
 ```
 1. Hypothesis Formation:
    Example: "Adversaries are using PowerShell for persistence"
-   
+
    Data Sources:
    - PowerShell logs
    - Scheduled tasks
@@ -407,7 +565,7 @@ Eradication Steps:
    PowerShell Commands:
    Get-WinEvent -LogName "Microsoft-Windows-PowerShell/Operational"
    Get-ScheduledTask | Where-Object {$_.Actions.Execute -like "*powershell*"}
-   
+
    Sysmon Queries:
    - Process creation (EventID 1)
    - File creation (EventID 11)
@@ -415,13 +573,14 @@ Eradication Steps:
 ```
 
 #### Threat Intelligence Implementation
+
 ```
 Intelligence Sources:
 1. Technical Feeds:
    - IP/Domain reputation
    - Malware hashes
    - YARA rules
-   
+
 2. Strategic Intelligence:
    - Threat actor profiles
    - Industry-specific threats
@@ -432,7 +591,7 @@ Integration Points:
    - Firewall rules
    - IDS signatures
    - Email filters
-   
+
 2. Detection Systems:
    - SIEM correlation rules
    - EDR indicators
@@ -446,6 +605,7 @@ Integration Points:
 ### 3.1 Vulnerability Management
 
 #### Vulnerability Scanning Process
+
 ```
 1. Scan Configuration:
    Network Scan Settings:
@@ -467,7 +627,7 @@ Integration Points:
    - File servers
    - Database servers
    - Workstations
-   
+
    External Systems:
    - Web servers
    - Email gateways
@@ -475,6 +635,7 @@ Integration Points:
 ```
 
 #### Vulnerability Assessment Framework
+
 ```
 1. Discovery Phase:
    Asset Inventory:
@@ -489,12 +650,12 @@ Integration Points:
    - Remote code execution
    - Privilege escalation
    - Zero-day vulnerabilities
-   
+
    High (CVSS 7.0-8.9):
    - Authentication bypass
    - SQL injection
    - XSS vulnerabilities
-   
+
    Medium (CVSS 4.0-6.9):
    - Information disclosure
    - Default credentials
@@ -513,6 +674,7 @@ Integration Points:
 ### 3.2 Penetration Testing
 
 #### Methodology Deep Dive
+
 ```
 1. Reconnaissance:
    Passive Information Gathering:
@@ -520,7 +682,7 @@ Integration Points:
    - DNS enumeration
    - Social media analysis
    - Public records
-   
+
    Active Information Gathering:
    - Port scanning
    - Service identification
@@ -530,11 +692,11 @@ Integration Points:
 2. Scanning & Enumeration:
    Network Analysis:
    nmap -sS -sV -O -p- target_ip
-   
+
    Web Application:
    nikto -h target_url
    dirb http://target_url
-   
+
    Service Enumeration:
    enum4linux -a target_ip
    smb_version.py target_ip
@@ -555,6 +717,7 @@ Integration Points:
 ```
 
 #### Common Testing Tools
+
 ```
 1. Network Testing:
    Tool: Wireshark
@@ -563,7 +726,7 @@ Integration Points:
    - Protocol inspection
    - Packet capture
    - Network debugging
-   
+
    Commands:
    tcp.port == 443
    http.request.method == "POST"
@@ -576,7 +739,7 @@ Integration Points:
    - Manual testing
    - API testing
    - Vulnerability reporting
-   
+
    Common Tests:
    - SQL injection
    - XSS detection
@@ -588,10 +751,10 @@ Integration Points:
    Commands:
    # Start monitoring
    airmon-ng start wlan0
-   
+
    # Capture handshakes
    airodump-ng -w capture wlan0mon
-   
+
    # Crack WPA
    aircrack-ng -w wordlist.txt capture.cap
 ```
@@ -599,6 +762,7 @@ Integration Points:
 ### 3.3 Security Monitoring
 
 #### Network Security Monitoring
+
 ```
 1. Traffic Analysis:
    Baseline Metrics:
@@ -606,7 +770,7 @@ Integration Points:
    - Protocol distribution
    - Connection patterns
    - Peak usage times
-   
+
    Alert Triggers:
    - Unusual protocols
    - Abnormal data transfers
@@ -630,11 +794,12 @@ Integration Points:
    - Privilege escalation
    - System changes
    - Policy violations
-   
+
    Correlation Rules:
    IF (Failed_Auth > 10 && Time_Window < 5min)
    THEN Create_Alert("Potential Brute Force")
 ```
+
 # CompTIA Security+ (SY0-701) Detailed Study Guide - Part 4
 
 ## 4. Identity and Access Management (18% of exam)
@@ -642,18 +807,19 @@ Integration Points:
 ### 4.1 Authentication Methods and Identity Management
 
 #### Multi-Factor Authentication (MFA) Implementation
+
 ```
 1. Factor Types:
    Something You Know:
    - Passwords/passphrases
    - Security questions
    - PIN codes
-   
+
    Something You Have:
    - Hardware tokens
    - Smart cards
    - Mobile devices
-   
+
    Something You Are:
    - Fingerprints
    - Facial recognition
@@ -683,13 +849,13 @@ Integration Points:
    - Corporate network
    - Regular hours
    → Password only
-   
+
    Medium Risk:
    - New device
    - Remote location
    - Off hours
    → Password + SMS/App
-   
+
    High Risk:
    - Unknown location
    - Sensitive data access
@@ -698,6 +864,7 @@ Integration Points:
 ```
 
 #### Identity Federation and SSO
+
 ```
 1. SAML Configuration:
    Service Provider Setup:
@@ -718,7 +885,7 @@ Integration Points:
       client_id: "abc123"
       client_secret: "xyz789"
       redirect_uri: "https://app/callback"
-   
+
    2. Authorization Request:
       GET /authorize?
         response_type=code&
@@ -732,7 +899,7 @@ Integration Points:
      "alg": "RS256",
      "typ": "JWT"
    }
-   
+
    Payload: {
      "sub": "user123",
      "iss": "https://auth.company.com",
@@ -744,6 +911,7 @@ Integration Points:
 ### 4.2 Access Control Implementation
 
 #### Role-Based Access Control (RBAC)
+
 ```
 1. Role Hierarchy:
    SuperAdmin
@@ -794,6 +962,7 @@ Integration Points:
 ### 5.1 Risk Management Framework
 
 #### Risk Assessment Process
+
 ```
 1. Asset Inventory:
    Critical Assets:
@@ -801,7 +970,7 @@ Integration Points:
   Value: $1M
   Impact: Critical
   Location: Primary datacenter
-  
+
    - Payment Processing
   Value: $500K
   Impact: High
@@ -829,7 +998,7 @@ Integration Points:
 3. Risk Calculation:
    Risk Score Formula:
    Risk = Impact × Likelihood × Exposure
-   
+
    Example Calculation:
    Data Breach Risk:
    Impact (1-10): 8
@@ -841,6 +1010,7 @@ Integration Points:
 ### 5.2 Compliance and Security Frameworks
 
 #### Regulatory Compliance
+
 ```
 1. GDPR Requirements:
    Data Protection Measures:
@@ -849,7 +1019,7 @@ Integration Points:
    □ Consent mechanisms implemented
    □ Data processing records
    □ DPO appointed
-   
+
    Breach Response:
    □ Detection mechanisms
    □ 72-hour notification plan
@@ -862,7 +1032,7 @@ Integration Points:
      • AES-256 for stored data
      • TLS 1.2+ for transmission
      • Key rotation every year
-   
+
    Requirement 8: Access Control
    - Password policies
    - MFA implementation
@@ -871,6 +1041,7 @@ Integration Points:
 ```
 
 #### Security Frameworks
+
 ```
 1. NIST Cybersecurity Framework:
    Core Functions:
@@ -878,20 +1049,20 @@ Integration Points:
    - Asset management
    - Business environment
    - Risk assessment
-   
+
    Protect:
    - Access control
    - Training
    - Data security
-   
+
    Detect:
    - Monitoring
    - Detection processes
-   
+
    Respond:
    - Response planning
    - Communications
-   
+
    Recover:
    - Recovery planning
    - Improvements
@@ -902,7 +1073,7 @@ Integration Points:
    - Policy documentation
    - Review procedures
    - Update processes
-   
+
    A.6 Organization of Information Security
    - Roles and responsibilities
    - Segregation of duties
